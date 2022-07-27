@@ -30,6 +30,7 @@ $ https://[decodeKey].lambda-url.eu-west-2.on.aws/?code=[1, 2, 3]
 
 # testing the encode endpoint in the browser using this url, you can find the encodeKey in the 
 # .env file, add the message to encode by using the **message** parameter '?message=MESSAGE GOES HERE'
+# like the example below
 
 $ https://[encodeKey].lambda-url.eu-west-2.on.aws/?message=example
 ```
