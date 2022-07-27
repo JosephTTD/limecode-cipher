@@ -23,14 +23,14 @@ I've used aws' new lambda functions urls for the endpoints, cors is set to all, 
 
 ```bash
 # testing the decode endpoint in the browser using this url, you can find the decodeKey in the 
-# .env file, add the code using the **code** parameter '?code=[]' seperated by commas in square 
-# brackets like the example below
+# .env file, add the code using the **code** parameter '?code=[]' with values seperated by commas
+# in square brackets like the example below
 
-$ https://[decodeKey].lambda-url.eu-west-2.on.aws/?code=[1, 2, 3]
+https://[decodeKey].lambda-url.eu-west-2.on.aws/?code=[1, 2, 3]
 
 # testing the encode endpoint in the browser using this url, you can find the encodeKey in the 
 # .env file, add the message to encode by using the **message** parameter '?message=MESSAGE GOES HERE'
 # like the example below
 
-$ https://[encodeKey].lambda-url.eu-west-2.on.aws/?message=example
+https://[encodeKey].lambda-url.eu-west-2.on.aws/?message=example
 ```
