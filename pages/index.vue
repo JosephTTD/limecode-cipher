@@ -11,8 +11,6 @@
         </button>
       </div>
       <component :is="current"></component>
-      <!--<Decoder />
-      <Encoder />-->
     </div>
   </div>
 </template>

@@ -1,4 +1,4 @@
-# limecode-challenge
+# limecode-cipher
 
 ## Build Setup
 

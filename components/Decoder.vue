@@ -5,7 +5,7 @@
       class="flex lg:flex-row flex-col space-y-[10px] lg:space-y-0 lg:space-x-[10px] justify-center items-center lg:px-[45px]"
     >
       <TextBox :editable="true" title="Encoded Message" :value.sync="code" />
-      <button type="submit" @click="convert()" class="absolute !ml-0">
+      <button type="submit" @click="convert()" class="absolute !ml-0 z-10">
         <Convert />
       </button>
       <TextBox title="Message" :parsed="decodedMessage" />
@@ -38,7 +38,7 @@ export default {
   methods: {
     convert() {
       const url =
-        "https://aueqp7qhrunxdnmi5w6f3zv5fa0yidpc.lambda-url.eu-west-2.on.aws/";
+        `https://${process.env.decodeKey}.lambda-url.eu-west-2.on.aws/`;
       let initial = this.code.split(" ");
       const arrOfNum = initial.map((str) => {
         return Number(str);
@@ -46,14 +46,12 @@ export default {
       axios
         .post(`${url}/?code=${JSON.stringify(arrOfNum)}`)
         .then((response) => {
-          console.log(response);
           this.error = "";
           this.decodedMessage = response.data;
         })
         .catch((error) => {
           this.decodedMessage = "";
           this.error = error.response.data;
-          console.log(error);
         });
     },
   },

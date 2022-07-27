@@ -4,7 +4,7 @@
     <div>
         <Encode v-if="encode === true" :class="activeIcon"/>
         <Decode v-if="decode === true" :class="activeIcon" />
-        <Decode v-if="copy === true" />
+        <Copy v-if="copy === true" />
     </div>
     <span class="border-l h-[24px] mx-[8px] border-grey-300"></span>
     <p class="text-[19px] font-normal" :class="active === true ? 'text-blue' : ''">{{value}}</p>

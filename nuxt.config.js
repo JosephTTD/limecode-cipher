@@ -27,6 +27,11 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  env: {
+    encodeKey: process.env.ENC || 'c43cauxfosqvimcwkwgrnvoj340birrv',
+    decodeKey: process.env.DEC || 'aueqp7qhrunxdnmi5w6f3zv5fa0yidpc'
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
