@@ -1,7 +1,7 @@
-//aws lambda code used to decode
-
 exports.handler = async (event) => {
     // TODO implement
+    const queryParam = event.queryStringParameters?.code
+
     const alphabet = ' abcdefghijklmnopqrstuvwxyz'.split('');
 
     var numbers = Array.apply(null, { length: 27 }).map(function(_, i) {
@@ -18,16 +18,12 @@ exports.handler = async (event) => {
         return num;
     }
 
-    function check(x) {
-        return x.every(i => (typeof i === "string"));
-    }
-
     function decode(num) {
         const resultStr = [];
         let temp;
         const resultNum = [];
-        for (let i = 0; i < num.length; i++) {
-            for (let j = 0; j < numbers.length; j++) {
+        for (let i = 0; i < num?.length; i++) {
+            for (let j = 0; j < numbers?.length; j++) {
                 resultNum.push(Array.from(num));
                 temp = resultNum[0];
                 if (divideBy27(temp[i]) === divideBy27(numbers[j])) {
@@ -36,22 +32,29 @@ exports.handler = async (event) => {
             }
         }
 
-        let error = { message: "" }
-
-        if (resultStr.length === 0) {
+        if (resultStr?.length === 0) {
             let error = { message: 'You require at least one number to decode' }
             throw error
         }
-        else if (check(num)) {
-            let error = { message: 'Please input numbers alone' }
+        if (num.includes(null)) {
+            let error = {
+                message: 'Please input numbers alone'
+            }
             throw error
+        }
+        
+        if(num.every(item => item === 0)) {
+            let error = {
+                message: 'Invalid message, please input a correct encoded message'
+            }
+            throw error 
         }
 
         return resultStr.join("");
     }
 
     try {
-        let success = decode(event['message'])
+        let success = queryParam !== undefined ? decode(JSON.parse(queryParam)) : decode([1594323, 15, 10935, 12])
         return formatResponse(success)
     }
     catch (error) {

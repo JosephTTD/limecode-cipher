@@ -1,17 +1,22 @@
-// aws lambda code used to encode 
-
 exports.handler = async (event) => {
   // TODO implement
+  const queryParam = event.queryStringParameters?.message
+  
+  // splitting alphabet into an array
   const alphabet = ' abcdefghijklmnopqrstuvwxyz'.split('');
 
+  // 0-26 in an array
   var numbers = Array.apply(null, { length: 27 }).map(function(_, i) {
     return i;
   });
 
+  /* Cipher logic starts here*/
+  
+  // randomised function to multiply numbers by 27 so the encoded message isn't always the same
   function multiplyBy27(num) {
     while (Math.random() * 0.5 < 0.25) {
       num = num * 27;
-
+      
       if (num === 0) {
         num = Math.floor(Math.random() * 100 + 28);
       }
@@ -21,9 +26,9 @@ exports.handler = async (event) => {
 
   function encode(str) {
     const resultStr = [];
-    var matches = str.match(/\d+/g);
-    for (let i = 0; i < str.length; i++) {
-      for (let j = 0; j < alphabet.length; j++) {
+    var matches = str?.match(/\d+/g);
+    for (let i = 0; i < str?.length; i++) {
+      for (let j = 0; j < alphabet?.length; j++) {
         if (str[i].toLowerCase() === alphabet[j]) {
           resultStr.push(multiplyBy27(numbers[j]));
         }
@@ -33,13 +38,22 @@ exports.handler = async (event) => {
     if (matches != null) {
       let error = { statusCode: 400, message: "String must not include numbers" }
       throw error
+    } 
+    
+    if(!str?.trim() || str?.length === 0) {
+      let error = { statusCode: 400, message: "Please input at least one value not including numbers or symbols" }
+      throw error
     }
     return resultStr.join(" ");
   }
+  /* Cipher logic ends here */
 
-
+  
+  // exception handling
   try {
-    let success = await encode(event['message'])
+    // using the null coalescing operator just for testing 
+    let success = encode(queryParam ?? event['message'])
+    console.log(formatResponse(success))
     return formatResponse(success)
   }
   catch (error) {
@@ -48,6 +62,8 @@ exports.handler = async (event) => {
 
 };
 
+
+// response formating
 var formatResponse = function(body) {
   var response = {
     "statusCode": 200,
