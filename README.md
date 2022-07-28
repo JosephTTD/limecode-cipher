@@ -19,7 +19,7 @@ $ yarn generate
 
 ## Testing the endpoints
 
-I've used aws' new lambda functions urls for the endpoints, cors is set to all, there are no roles and no use of IAM
+I've used aws' new lambda functions urls for the endpoints, cors is set to all, there are no roles and no use of API gateway
 
 ## Decode
 
