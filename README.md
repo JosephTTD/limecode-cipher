@@ -1,4 +1,5 @@
 # limecode-cipher
+A numeric substition cipher implementation using AWS lambdas and nuxt for the frontend
 
 ## Build Setup
 Note this app won't work on your local if you don't have the environment variables
