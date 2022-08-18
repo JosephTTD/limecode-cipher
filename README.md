@@ -1,7 +1,7 @@
 # limecode-cipher
 
 ## Build Setup
-## Note this app won't work on your local if you don't have the environment variables
+Note this app won't work on your local if you don't have the environment variables
 
 ```bash
 # install dependencies
